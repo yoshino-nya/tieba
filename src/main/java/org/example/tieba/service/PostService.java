@@ -56,12 +56,12 @@ public class PostService {
 
     public void updatePost(Long postId, UpdatePostRequest req) {
         Post post = postMapper.selectById(postId);
-        post.setUser_id(securityUtil.getCurrentUserId());
-        /*
-        不考虑帖子是否存在，或用户id是否对应
-        不合法数据不会更新
-        标题和内容可能为 null，但不能全为空
-        */
+        if (post == null) {
+            throw new BusinessException(ErrorCodeConstants.NOT_FOUND, "帖子不存在");
+        }
+        if (!Objects.equals(post.getUser_id(), securityUtil.getCurrentUserId())) {
+            throw new BusinessException(ErrorCodeConstants.FORBIDDEN, "无权限修改此帖子");
+        }
         post.setTitle(req.getTitle());
         post.setContent(req.getContent());
         post.setUpdated_at(LocalDateTime.now());

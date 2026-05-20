@@ -41,6 +41,7 @@ public class BoardController {
 
     @DeleteMapping("/{id}/members")
     public ResponseEntity<ApiResponse<Void>> leave(@PathVariable Long id) {
+        boardMemberService.leave(id);
         return ResponseEntity.ok(ApiResponse.success());
     }
 

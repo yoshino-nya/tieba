@@ -18,4 +18,6 @@ logging:
     org.mybatis: DEBUG
     com.zaxxer.hikari: DEBUG
 mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
   mapper-locations: mapper/*.xml

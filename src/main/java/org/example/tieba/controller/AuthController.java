@@ -18,8 +18,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-    public record Result(String msg) {}
-
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));

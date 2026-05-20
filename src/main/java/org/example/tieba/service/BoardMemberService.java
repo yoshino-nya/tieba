@@ -31,8 +31,8 @@ public class BoardMemberService {
         }
     }
 
-    public void leave(Long id) {
-        boardMemberMapper.remove(id);
+    public void leave(Long boardId) {
+        boardMemberMapper.remove(boardId, securityUtil.getCurrentUserId());
     }
 
     public List<BoardMemberResponse> listMembers(Long boardId) {

@@ -16,8 +16,8 @@ public interface BoardMemberMapper {
             """)
     void insert(BoardMember boardMember);
 
-    @Delete("DELETE FROM board_members WHERE user_id = #{id}")
-    void remove(Long id);
+    @Delete("DELETE FROM board_members WHERE board_id = #{boardId} AND user_id = #{userId}")
+    void remove(Long boardId, Long userId);
 
     @Select("""
         SELECT
