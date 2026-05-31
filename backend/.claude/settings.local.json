@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn compile *)",
+      "Bash(./mvnw compile *)",
+      "Bash(git checkout *)",
+      "Bash(./mvnw dependency:tree -Dincludes=com.fasterxml.jackson.core)",
+      "Bash(xargs cat)"
+    ]
+  }
+}
