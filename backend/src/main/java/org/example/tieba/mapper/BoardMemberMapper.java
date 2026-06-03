@@ -24,12 +24,9 @@ public interface BoardMemberMapper {
             u.id AS userId,
             u.username,
             u.nickname,
-            u.avatar,
-            u.email,
-            bm.role,
-            bm.joined_at AS joinedAt
+            u.avatar
         FROM board_members bm
-        JOIN users u ON bm.user_id = u.id
+        JOIN users u ON u.id = bm.user_id
         WHERE bm.board_id = #{boardId}
     """)
     List<BoardMemberResponse> selectMembers(Long boardId);

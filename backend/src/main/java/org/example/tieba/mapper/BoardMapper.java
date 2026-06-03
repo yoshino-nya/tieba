@@ -23,7 +23,7 @@ public interface BoardMapper {
     void insert(Board board);
 
     @Select("""
-                SELECT id, CONCAT(name, '吧'), description, manager_id, created_at
+                SELECT id, CONCAT(name, '吧') AS name, description, manager_id, created_at
                 FROM boards
             """)
     List<BoardResponse> selectAll();

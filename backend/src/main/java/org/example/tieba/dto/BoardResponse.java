@@ -1,6 +1,7 @@
 package org.example.tieba.dto;
 
 import lombok.Data;
+import org.example.tieba.model.Board;
 
 import java.time.LocalDateTime;
 
@@ -9,14 +10,17 @@ public class BoardResponse {
     private Long id;
     private String name;
     private String description;
-    private Long manager_id;
-    private LocalDateTime created_at;
+    private Long managerId;
+    private LocalDateTime createdAt;
 
-    public BoardResponse(Long id, String name, String description, Long manager_id, LocalDateTime created_at) {
+    public BoardResponse() {
+    }
+
+    public BoardResponse(Long id, String name, String description, Long managerId, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.manager_id = manager_id;
-        this.created_at = created_at;
+        this.managerId = managerId;
+        this.createdAt = createdAt;
     }
 }

@@ -34,13 +34,12 @@ public interface CommentMapper {
     @Select("""
                 SELECT
                     id,
-                    user_id AS userId,
+                    user_id,
                     content,
-                    post_id AS postId,
-                    root_id AS rootId,
-                    parent_id AS parent_ID,
-                    status,
-                    created_at AS createdAt
+                    post_id,
+                    root_id,
+                    parent_id,
+                    created_at
                 FROM comment
                 WHERE post_id = #{postId} AND status = 0
                 ORDER BY created_at
@@ -49,6 +48,9 @@ public interface CommentMapper {
 
     @Update("UPDATE comment SET status = 1 WHERE id = #{id}")
     void deleteById(Long id);
+
+    @Update("UPDATE comment SET root_id = id WHERE id = #{id}")
+    void setRootId(Long id);
 
     @Select("SELECT user_id FROM comment WHERE id = #{id} AND status = 0")
     Long selectUserIdById(Long id);

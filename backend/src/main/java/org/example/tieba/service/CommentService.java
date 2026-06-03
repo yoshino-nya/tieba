@@ -8,6 +8,7 @@ import org.example.tieba.mapper.CommentMapper;
 import org.example.tieba.model.Comment;
 import org.example.tieba.util.SecurityUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +24,7 @@ public class CommentService {
         this.commentMapper = commentMapper;
     }
 
+    @Transactional
     public CommentResponse create(CreateCommentRequest req, Long postId) {
         Comment comment = new Comment();
 
@@ -44,13 +46,16 @@ public class CommentService {
                 throw new BusinessException(ErrorCode.BAD_REQUEST, "无效的回复");
 
             comment.setRootId(parentComment.getRootId());
-        } else {
-            // 该评论为一级评论，rootId 设置成自己
-            comment.setRootId(postId);
+            comment.setParentId(parentComment.getId());
         }
         comment.setCreatedAt(LocalDateTime.now());
         commentMapper.insert(comment);
 
+        // 一级评论需要单独把 rootId 设置为 id
+        if (comment.getRootId() == null) {
+            comment.setRootId(comment.getId());
+            commentMapper.setRootId(comment.getRootId());
+        }
         return new CommentResponse(comment);
     }
 

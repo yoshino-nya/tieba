@@ -8,17 +8,7 @@ public class BoardMemberResponse {
     private String username;
     private String nickname;
     private String avatar;
-    private String email;
+    public BoardMemberResponse() {
 
-    private String role;
-    private String joinedAt;
-
-    public BoardMemberResponse(Long userId, String username, String nickname, String avatar, String email, String role, String joinedAt) {
-        this.username = username;
-        this.nickname = nickname;
-        this.avatar = avatar;
-        this.email = email;
-        this.role = role;
-        this.joinedAt = joinedAt;
     }
 }

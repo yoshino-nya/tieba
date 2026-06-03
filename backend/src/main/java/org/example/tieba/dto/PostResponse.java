@@ -8,36 +8,23 @@ import java.time.LocalDateTime;
 @Data
 public class PostResponse {
     private Long id;
-    private Long user_id;
-    private Long board_id;
+    private UserBrief author;
+    private Long boardId;
     private String title;
     private String content;
-    private Long like_count;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
-    private byte status;
+    private Long likeCount;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public PostResponse(Long id, Long user_id, Long board_id, String title, String content, Long like_count, LocalDateTime created_at, LocalDateTime updated_at, byte status) {
-        this.id = id;
-        this.user_id = user_id;
-        this.board_id = board_id;
-        this.title = title;
-        this.content = content;
-        this.like_count = like_count;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-        this.status = status;
-    }
+    public PostResponse() {}
 
     public PostResponse(Post post) {
         this.id = post.getId();
-        this.user_id = post.getUserId();
-        this.board_id = post.getBoardId();
+        this.boardId = post.getBoardId();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.like_count = post.getLikeCount();
-        this.created_at = post.getCreatedAt();
-        this.updated_at = post.getUpdatedAt();
-        this.status = post.getStatus();
+        this.likeCount = post.getLikeCount();
+        this.createdAt = post.getCreatedAt();
+        this.updatedAt = post.getUpdatedAt();
     }
 }

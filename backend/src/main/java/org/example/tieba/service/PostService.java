@@ -2,12 +2,10 @@ package org.example.tieba.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.tieba.constants.ErrorCode;
-import org.example.tieba.dto.BoardResponse;
-import org.example.tieba.dto.PostRequest;
-import org.example.tieba.dto.PostResponse;
-import org.example.tieba.dto.UpdatePostRequest;
+import org.example.tieba.dto.*;
 import org.example.tieba.exception.BusinessException;
 import org.example.tieba.mapper.PostMapper;
+import org.example.tieba.mapper.UserMapper;
 import org.example.tieba.model.Post;
 import org.example.tieba.util.SecurityUtil;
 import org.springframework.stereotype.Service;
@@ -22,10 +20,12 @@ public class PostService {
 
     private final PostMapper postMapper;
     private final SecurityUtil securityUtil;
+    private final UserMapper userMapper;
 
-    public PostService(PostMapper postMapper, SecurityUtil securityUtil) {
+    public PostService(PostMapper postMapper, SecurityUtil securityUtil, UserMapper userMapper) {
         this.postMapper = postMapper;
         this.securityUtil = securityUtil;
+        this.userMapper = userMapper;
     }
 
     public PostResponse post(Long boardId, PostRequest req) {
@@ -45,7 +45,9 @@ public class PostService {
         post.setStatus((byte) 0);
 
         postMapper.insert(post);
-        return new PostResponse(post);
+        PostResponse postResponse = new PostResponse(post);
+        postResponse.setAuthor(userMapper.findBriefById(securityUtil.getCurrentUserId()));
+        return postResponse;
     }
 
     public List<PostResponse> listPostsByBoard(Long boardId) {

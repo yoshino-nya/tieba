@@ -5,7 +5,14 @@
       "Bash(./mvnw compile *)",
       "Bash(git checkout *)",
       "Bash(./mvnw dependency:tree -Dincludes=com.fasterxml.jackson.core)",
-      "Bash(xargs cat)"
+      "Bash(xargs cat)",
+      "WebFetch(domain:adpm1djmwr.apifox.cn)",
+      "Read(//home/yoshino/Downloads/**)",
+      "Read(//home/yoshino/dev/java/tieba/**)",
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(git restore *)"
     ]
   }
 }

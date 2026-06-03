@@ -77,3 +77,7 @@ CREATE TABLE comment (
 
 ALTER TABLE users
 MODIFY COLUMN username VARCHAR(39) NOT NULL;
+
+-- root_id 可以不要设置 NOT NULL，一级评论需要将 root_id 设置为 id，本质插入之后是 NOT NULL
+ALTER TABLE comment
+MODIFY COLUMN root_id BIGINT NULL;

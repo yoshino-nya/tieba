@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Result<Void>> handleOther(Exception e) {
         log.error("系统错误", e);
         return ResponseEntity.internalServerError().body(
-                new Result<>(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), "服务器错误")
+                new Result<>(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), "服务器错误" + e.getMessage())
         );
     }
 }
