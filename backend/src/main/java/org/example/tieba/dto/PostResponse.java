@@ -15,6 +15,7 @@ public class PostResponse {
     private Long likeCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private boolean liked;
 
     public PostResponse() {}
 

@@ -50,12 +50,16 @@ public class PostService {
         return postResponse;
     }
 
+    public PostDetailResponse getDetail(Long postId) {
+        return postMapper.selectDetailById(postId, securityUtil.getCurrentUserId());
+    }
+
     public List<PostResponse> listPostsByBoard(Long boardId) {
-        return postMapper.selectByBoardId(boardId);
+        return postMapper.selectByBoardId(boardId, securityUtil.getCurrentUserId());
     }
 
     public List<PostResponse> listPostsByUser(Long userId) {
-        return postMapper.selectByUserId(userId);
+        return postMapper.selectByUserId(userId, securityUtil.getCurrentUserId());
     }
 
     public void updatePost(Long postId, UpdatePostRequest req) {

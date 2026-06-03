@@ -12,15 +12,19 @@ public class BoardResponse {
     private String description;
     private Long managerId;
     private LocalDateTime createdAt;
+    private int memberCount;
+    private int postCount;
 
     public BoardResponse() {
     }
 
-    public BoardResponse(Long id, String name, String description, Long managerId, LocalDateTime createdAt) {
+    public BoardResponse(Long id, String name, String description, Long managerId, LocalDateTime createdAt, int memberCount, int postCount) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.managerId = managerId;
         this.createdAt = createdAt;
+        this.memberCount = memberCount;
+        this.postCount = postCount;
     }
 }

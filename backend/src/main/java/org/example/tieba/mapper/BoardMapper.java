@@ -3,6 +3,7 @@ package org.example.tieba.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.example.tieba.dto.BoardDetailResponse;
 import org.example.tieba.dto.BoardResponse;
 import org.example.tieba.model.Board;
 
@@ -22,9 +23,20 @@ public interface BoardMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Board board);
 
+    // 每个吧的成员数量和帖子数量
     @Select("""
-                SELECT id, CONCAT(name, '吧') AS name, description, manager_id, created_at
-                FROM boards
+                SELECT b.id, CONCAT(b.name, '吧') AS name, b.description, b.manager_id, b.created_at,
+                (
+                    SELECT COUNT(*) FROM board_members bm
+                    WHERE bm.board_id = b.id
+                ) AS member_count,
+                (
+                    SELECT COUNT(*) FROM post p
+                    WHERE p.board_id = b.id
+                ) AS post_count
+                FROM boards b
             """)
     List<BoardResponse> selectAll();
+
+    BoardDetailResponse selectDetailById(Long id);
 }

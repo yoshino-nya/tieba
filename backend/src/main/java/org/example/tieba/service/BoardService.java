@@ -1,8 +1,9 @@
 package org.example.tieba.service;
 
 import org.example.tieba.constants.ErrorCode;
-import org.example.tieba.dto.CreateBoardRequest;
+import org.example.tieba.dto.BoardDetailResponse;
 import org.example.tieba.dto.BoardResponse;
+import org.example.tieba.dto.CreateBoardRequest;
 import org.example.tieba.exception.BusinessException;
 import org.example.tieba.mapper.BoardMapper;
 import org.example.tieba.model.Board;
@@ -41,8 +42,12 @@ public class BoardService {
         // 创建贴吧后需要把当前用户设置为吧主
         boardMemberService.join(board.getId(), "owner");
         return new BoardResponse(
-                board.getId(), board.getName() + "吧", board.getDescription(), board.getManager_id(), board.getCreated_at()
+                board.getId(), board.getName() + "吧", board.getDescription(), board.getManager_id(), board.getCreated_at(), 1, 0
         );
+    }
+
+    public BoardDetailResponse getDetail(Long id) {
+        return boardMapper.selectDetailById(id);
     }
 
     public List<BoardResponse> listBoards() {

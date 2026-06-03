@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.example.tieba.dto.PostDetailResponse;
 import org.example.tieba.dto.PostResponse;
 import org.example.tieba.model.Post;
 
@@ -20,14 +21,16 @@ public interface PostMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Post post);
 
+    PostDetailResponse selectDetailById(Long id, Long currentUserId);
+
     void update(Post post);
 
-    List<PostResponse> selectByBoardId(Long boardId);
+    List<PostResponse> selectByBoardId(Long boardId, Long currentUserId);
 
     @Select("SELECT user_id FROM post WHERE id = #{postId}")
     Long selectUserByPostId(Long postId);
 
-    List<PostResponse> selectByUserId(Long userId);
+    List<PostResponse> selectByUserId(Long userId, Long currentUserId);
 
     // status 为 1 表示帖子被删除，0 正常，2 隐藏
     @Select("""

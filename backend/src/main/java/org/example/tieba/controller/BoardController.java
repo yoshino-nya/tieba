@@ -2,6 +2,7 @@ package org.example.tieba.controller;
 
 import jakarta.validation.Valid;
 import org.example.tieba.common.Result;
+import org.example.tieba.dto.BoardDetailResponse;
 import org.example.tieba.dto.BoardMemberResponse;
 import org.example.tieba.dto.CreateBoardRequest;
 import org.example.tieba.dto.BoardResponse;
@@ -25,6 +26,11 @@ public class BoardController {
     @PostMapping("")
     public Result<BoardResponse> create(@Valid @RequestBody CreateBoardRequest req) {
         return Result.success(boardService.create(req));
+    }
+
+    @GetMapping("/{id}")
+    public Result<BoardDetailResponse> getDetail(@PathVariable Long id) {
+        return Result.success(boardService.getDetail(id));
     }
 
     @GetMapping("/{id}/members")

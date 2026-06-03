@@ -12,7 +12,9 @@
       "Bash(npm create *)",
       "Bash(npm install *)",
       "Bash(npm run *)",
-      "Bash(git restore *)"
+      "Bash(git restore *)",
+      "Bash(npm --prefix /home/yoshino/dev/java/tiebaFrontEnd run build)",
+      "Bash(npm *)"
     ]
   }
 }

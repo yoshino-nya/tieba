@@ -32,6 +32,11 @@ public class PostController {
         return Result.success(postService.listPostsByUser(userId));
     }
 
+    @GetMapping("/api/posts/{postId}")
+    public Result<PostDetailResponse> getDetail(@PathVariable Long postId) {
+        return Result.success(postService.getDetail(postId));
+    }
+
     @PatchMapping("/api/posts/{postId}")
     public Result<Void> updatePost(@PathVariable Long postId, @Valid @RequestBody UpdatePostRequest req) {
         // 校验至少一个字段有值，并将空白字符串视为 null 处理
