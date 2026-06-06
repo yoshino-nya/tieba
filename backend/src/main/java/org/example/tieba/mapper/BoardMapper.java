@@ -16,6 +16,9 @@ public interface BoardMapper {
     @Select("SELECT COUNT(1) FROM boards WHERE name = #{name}")
     boolean existsByName(String name);
 
+    @Select("SELECT COUNT(*) FROM boards ")
+    int count();
+
     @Insert("""
                     INSERT INTO boards (name, description, manager_id, created_at)
                     VALUES (#{name},#{description}, #{manager_id}, #{created_at})
@@ -35,8 +38,9 @@ public interface BoardMapper {
                     WHERE p.board_id = b.id
                 ) AS post_count
                 FROM boards b
+                LIMIT #{offset}, #{limit}
             """)
-    List<BoardResponse> selectAll();
+    List<BoardResponse> selectAll(int offset, int limit);
 
     BoardDetailResponse selectDetailById(Long id);
 }

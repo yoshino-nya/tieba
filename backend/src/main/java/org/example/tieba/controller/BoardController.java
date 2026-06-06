@@ -1,11 +1,9 @@
 package org.example.tieba.controller;
 
 import jakarta.validation.Valid;
+import org.example.tieba.common.PageResult;
 import org.example.tieba.common.Result;
-import org.example.tieba.dto.BoardDetailResponse;
-import org.example.tieba.dto.BoardMemberResponse;
-import org.example.tieba.dto.CreateBoardRequest;
-import org.example.tieba.dto.BoardResponse;
+import org.example.tieba.dto.*;
 import org.example.tieba.service.BoardMemberService;
 import org.example.tieba.service.BoardService;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +49,7 @@ public class BoardController {
     }
 
     @GetMapping("")
-    public Result<List<BoardResponse>> listBoards() {
-        return Result.success(boardService.listBoards());
+    public Result<PageResult<BoardResponse>> listBoards(@Valid PageParam pageParam) {
+        return Result.success(boardService.listBoards(pageParam));
     }
 }

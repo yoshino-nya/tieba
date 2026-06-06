@@ -21,16 +21,22 @@ public interface PostMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Post post);
 
+    @Select("SELECT COUNT(*) FROM post WHERE board_id = #{boardId} AND status = 0")
+    int countByBoardId(Long boardId);
+
+    @Select("SELECT COUNT(*) FROM post WHERE user_id = #{user_id} AND status = 0")
+    int countByUserId(Long userId);
+
     PostDetailResponse selectDetailById(Long id, Long currentUserId);
 
     void update(Post post);
 
-    List<PostResponse> selectByBoardId(Long boardId, Long currentUserId);
+    List<PostResponse> selectByBoardId(Long boardId, Long currentUserId, int offset, int size);
 
     @Select("SELECT user_id FROM post WHERE id = #{postId}")
     Long selectUserByPostId(Long postId);
 
-    List<PostResponse> selectByUserId(Long userId, Long currentUserId);
+    List<PostResponse> selectByUserId(Long userId, Long currentUserId, int offset, int size);
 
     // status 为 1 表示帖子被删除，0 正常，2 隐藏
     @Select("""

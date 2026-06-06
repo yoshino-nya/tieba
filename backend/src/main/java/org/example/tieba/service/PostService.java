@@ -1,6 +1,7 @@
 package org.example.tieba.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.tieba.common.PageResult;
 import org.example.tieba.constants.ErrorCode;
 import org.example.tieba.dto.*;
 import org.example.tieba.exception.BusinessException;
@@ -54,12 +55,20 @@ public class PostService {
         return postMapper.selectDetailById(postId, securityUtil.getCurrentUserId());
     }
 
-    public List<PostResponse> listPostsByBoard(Long boardId) {
-        return postMapper.selectByBoardId(boardId, securityUtil.getCurrentUserId());
+    public PageResult<PostResponse> listPostsByBoard(Long boardId, PageParam pageParam) {
+        int current = pageParam.getCurrent();
+        int size = pageParam.getSize();
+        int offset = (current - 1) * size;
+        List<PostResponse> list = postMapper.selectByBoardId(boardId, securityUtil.getCurrentUserId(), offset, size);
+        return new PageResult<>(postMapper.countByBoardId(boardId), pageParam.getCurrent(), pageParam.getSize(), list);
     }
 
-    public List<PostResponse> listPostsByUser(Long userId) {
-        return postMapper.selectByUserId(userId, securityUtil.getCurrentUserId());
+    public PageResult<PostResponse> listPostsByUser(Long userId, PageParam pageParam) {
+        int current = pageParam.getCurrent();
+        int size = pageParam.getSize();
+        int offset = (current - 1) * size;
+        List<PostResponse> list = postMapper.selectByUserId(userId, securityUtil.getCurrentUserId(), offset, size);
+        return new PageResult<>(postMapper.countByUserId(userId), pageParam.getCurrent(), pageParam.getSize(), list );
     }
 
     public void updatePost(Long postId, UpdatePostRequest req) {

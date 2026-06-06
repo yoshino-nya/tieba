@@ -39,6 +39,7 @@
             AND pl.status = 1
         WHERE p.board_id = #{boardId} AND p.status = 0
         ORDER BY p.id DESC
+        LIMIT #{offset}, #{size}
     </select>
     <select id="selectByUserId" resultMap="postResponse">
         SELECT p.id, p.board_id, p.title, p.content, p.like_count, p.created_at, p.updated_at,
@@ -54,6 +55,7 @@
             AND pl.status = 1
         WHERE u.id = #{userId} AND p.status = 0
         ORDER BY p.id DESC
+        LIMIT #{offset}, #{size}
     </select>
 
     <resultMap id="postDetailResponse" type="org.example.tieba.dto.PostDetailResponse" autoMapping="true">

@@ -1,10 +1,10 @@
 package org.example.tieba.controller;
 
 import jakarta.validation.Valid;
+import org.example.tieba.common.PageResult;
 import org.example.tieba.common.Result;
 import org.example.tieba.dto.*;
 import org.example.tieba.service.PostService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,13 +23,13 @@ public class PostController {
     }
 
     @GetMapping("/api/boards/{boardId}/posts")
-    public Result<List<PostResponse>> listPostsByBoard(@PathVariable Long boardId) {
-        return Result.success(postService.listPostsByBoard(boardId));
+    public Result<PageResult<PostResponse>> listPostsByBoard(@PathVariable Long boardId, @Valid PageParam pageParam) {
+        return Result.success(postService.listPostsByBoard(boardId, pageParam));
     }
 
     @GetMapping("/api/users/{userId}/posts")
-    public Result<List<PostResponse>> listPostsByUserId(@PathVariable Long userId) {
-        return Result.success(postService.listPostsByUser(userId));
+    public Result<PageResult<PostResponse>> listPostsByUserId(@PathVariable Long userId, @Valid PageParam pageParam) {
+        return Result.success(postService.listPostsByUser(userId, pageParam));
     }
 
     @GetMapping("/api/posts/{postId}")

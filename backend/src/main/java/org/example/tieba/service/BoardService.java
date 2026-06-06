@@ -1,9 +1,11 @@
 package org.example.tieba.service;
 
+import org.example.tieba.common.PageResult;
 import org.example.tieba.constants.ErrorCode;
 import org.example.tieba.dto.BoardDetailResponse;
 import org.example.tieba.dto.BoardResponse;
 import org.example.tieba.dto.CreateBoardRequest;
+import org.example.tieba.dto.PageParam;
 import org.example.tieba.exception.BusinessException;
 import org.example.tieba.mapper.BoardMapper;
 import org.example.tieba.model.Board;
@@ -50,7 +52,11 @@ public class BoardService {
         return boardMapper.selectDetailById(id);
     }
 
-    public List<BoardResponse> listBoards() {
-        return boardMapper.selectAll();
+    public PageResult<BoardResponse> listBoards(PageParam pageParam) {
+        int current = pageParam.getCurrent();
+        int size = pageParam.getSize();
+        int offset = (current - 1) * size;
+        List<BoardResponse> list = boardMapper.selectAll(offset, size);
+        return new PageResult<>(boardMapper.count(), current, size, list);
     }
 }
