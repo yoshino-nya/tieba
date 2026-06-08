@@ -1,9 +1,9 @@
 package org.example.tieba.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.example.tieba.dto.UpdateUserRequest;
 import org.example.tieba.dto.UserBrief;
+import org.example.tieba.dto.UserDetailResponse;
 import org.example.tieba.model.User;
 
 public interface UserMapper {
@@ -23,4 +23,13 @@ public interface UserMapper {
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(User user);
+
+    @Select("SELECT id, username, nickname, avatar, email FROM users WHERE id = #{id}")
+    UserDetailResponse selectDetailById(Long id);
+
+    @Update("UPDATE users SET nickname = #{nickname}, email = #{email} WHERE id = #{id} ")
+    void update(UserDetailResponse req);
+
+    @Update("UPDATE users SET avatar = #{avatar} WHERE id = #{id}")
+    void updateAvatar(String avatar, Long id);
 }
