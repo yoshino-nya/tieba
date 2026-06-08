@@ -35,7 +35,7 @@ public interface BoardMapper {
                 ) AS member_count,
                 (
                     SELECT COUNT(*) FROM post p
-                    WHERE p.board_id = b.id
+                    WHERE p.board_id = b.id AND p.status = 0
                 ) AS post_count
                 FROM boards b
                 LIMIT #{offset}, #{limit}
