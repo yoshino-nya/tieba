@@ -5,6 +5,7 @@ import org.example.tieba.dto.CommentResponse;
 import org.example.tieba.dto.CreateCommentRequest;
 import org.example.tieba.exception.BusinessException;
 import org.example.tieba.mapper.CommentMapper;
+import org.example.tieba.mapper.UserMapper;
 import org.example.tieba.model.Comment;
 import org.example.tieba.util.SecurityUtil;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,12 @@ import java.util.Objects;
 public class CommentService {
     private final SecurityUtil securityUtil;
     private final CommentMapper commentMapper;
+    private final UserMapper userMapper;
 
-    public CommentService(SecurityUtil securityUtil, CommentMapper commentMapper) {
+    public CommentService(SecurityUtil securityUtil, CommentMapper commentMapper, UserMapper userMapper) {
         this.securityUtil = securityUtil;
         this.commentMapper = commentMapper;
+        this.userMapper = userMapper;
     }
 
     @Transactional
@@ -56,7 +59,15 @@ public class CommentService {
             comment.setRootId(comment.getId());
             commentMapper.setRootId(comment.getRootId());
         }
-        return new CommentResponse(comment);
+        CommentResponse resp = new CommentResponse();
+        resp.setId(comment.getId());
+        resp.setContent(comment.getContent());
+        resp.setPostId(postId);
+        resp.setRootId(comment.getRootId());
+        resp.setParentId(comment.getParentId());
+        resp.setCreatedAt(LocalDateTime.now());
+        resp.setUserBrief(userMapper.findBriefById(comment.getUserId()));
+        return resp;
     }
 
     public List<CommentResponse> list(Long postId) {

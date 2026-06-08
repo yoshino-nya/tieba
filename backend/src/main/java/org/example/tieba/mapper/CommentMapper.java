@@ -31,19 +31,6 @@ public interface CommentMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Comment comment);
 
-    @Select("""
-                SELECT
-                    id,
-                    user_id,
-                    content,
-                    post_id,
-                    root_id,
-                    parent_id,
-                    created_at
-                FROM comment
-                WHERE post_id = #{postId} AND status = 0
-                ORDER BY created_at
-            """)
     List<CommentResponse> selectByPostId(Long postId);
 
     @Update("UPDATE comment SET status = 1 WHERE id = #{id}")
