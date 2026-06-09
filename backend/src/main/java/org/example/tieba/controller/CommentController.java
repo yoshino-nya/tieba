@@ -1,6 +1,7 @@
 package org.example.tieba.controller;
 
 import jakarta.validation.Valid;
+import org.example.tieba.annotation.RateLimit;
 import org.example.tieba.common.Result;
 import org.example.tieba.dto.CommentResponse;
 import org.example.tieba.dto.CreateCommentRequest;
@@ -18,6 +19,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+    @RateLimit(key = "comment", limit = 10, window = 10)
     @PostMapping("/api/posts/{postId}/comments")
     public Result<CommentResponse> create(@Valid @RequestBody CreateCommentRequest req, @PathVariable Long postId) {
         return Result.success(commentService.create(req, postId));

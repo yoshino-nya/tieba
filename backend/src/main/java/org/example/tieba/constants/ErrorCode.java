@@ -11,6 +11,7 @@ public enum ErrorCode {
     // 资源相关
     RESOURCE_ALREADY_EXISTS("RESOURCE_ALREADY_EXISTS", 409), // 409 Conflict
     RESOURCE_NOT_FOUND("RESOURCE_NOT_FOUND", 404), // 404 Not Found
+    TOO_MANY_REQUESTS("TOO_MANY_REQUESTS",429),
 
     // 用户相关
     USER_NOT_FOUND("USER_NOT_FOUND", 404), // 404 Not Found

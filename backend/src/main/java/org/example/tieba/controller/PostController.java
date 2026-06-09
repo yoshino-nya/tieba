@@ -1,6 +1,7 @@
 package org.example.tieba.controller;
 
 import jakarta.validation.Valid;
+import org.example.tieba.annotation.RateLimit;
 import org.example.tieba.common.PageResult;
 import org.example.tieba.common.Result;
 import org.example.tieba.dto.*;
@@ -17,6 +18,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    @RateLimit(key = "post", limit = 1, window = 60)
     @PostMapping("/api/boards/{boardId}/posts")
     public Result<PostResponse> post(@PathVariable Long boardId, @Valid @RequestBody PostRequest req) {
         return Result.success(postService.post(boardId, req));
