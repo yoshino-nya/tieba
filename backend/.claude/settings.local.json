@@ -14,7 +14,10 @@
       "Bash(npm run *)",
       "Bash(git restore *)",
       "Bash(npm --prefix /home/yoshino/dev/java/tiebaFrontEnd run build)",
-      "Bash(npm *)"
+      "Bash(npm *)",
+      "Read(//home/yoshino/.m2/repository/org/springframework/boot/spring-boot-starter-aop/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-aop/4.0.6/spring-boot-starter-aop-4.0.6.pom)",
+      "Bash(redis-cli ping *)"
     ]
   }
 }
