@@ -3,6 +3,7 @@ package org.example.tieba.ai;
 import dev.langchain4j.agent.tool.Tool;
 import lombok.RequiredArgsConstructor;
 import org.example.tieba.board.BoardMapper;
+import org.example.tieba.post.PostMapper;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class ForumTools {
 
     private final BoardMapper boardMapper;
+    private final PostMapper postMapper;
 
     @Tool("获取所有贴吧列表，用于向用户推荐贴吧")
     public String listBoards() {
@@ -28,19 +30,20 @@ public class ForumTools {
                 .collect(Collectors.joining("\n"));
     }
 
-//    @Tool("根据关键词搜索帖子，返回匹配的帖子标题和内容摘要")
-//    public String searchPosts(@P("搜索关键词") String keyword) {
-//        var posts = postMapper.searchByKeyword(keyword);
-//        if (posts.isEmpty()) return "没有找到与「%s」相关的帖子".formatted(keyword);
-//        return posts.stream()
-//                .map(p -> "【%s】%s — %s".formatted(
-//                        p.getBoardName(),
-//                        p.getTitle(),
-//                        p.getContent().length() > 100
-//                                ? p.getContent().substring(0, 100) + "..."
-//                                : p.getContent()))
-//                .collect(Collectors.joining("\n---\n"));
-//    }
+    @Tool("根据关键词搜索帖子，返回匹配的帖子标题和内容摘要")
+    public String searchPosts(String keyword) {
+        if (keyword == null || keyword.isBlank()) return "请提供搜索关键词";
+        var posts = postMapper.searchByKeyword(keyword.trim(), 0L, 0, 20);
+        if (posts.isEmpty()) return "没有找到与「%s」相关的帖子".formatted(keyword);
+        return posts.stream()
+                .map(p -> "【%s】%s — %s".formatted(
+                        p.getBoardName() != null ? p.getBoardName() : "贴吧",
+                        p.getTitle(),
+                        p.getContent().length() > 100
+                                ? p.getContent().substring(0, 100) + "..."
+                                : p.getContent()))
+                .collect(Collectors.joining("\n---\n"));
+    }
 
     @Tool("获取当前日期时间")
     public String currentTime() {

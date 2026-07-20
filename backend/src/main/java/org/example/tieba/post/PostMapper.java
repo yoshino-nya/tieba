@@ -35,6 +35,10 @@ public interface PostMapper {
 
     List<PostResponse> selectByUserId(Long userId, Long currentUserId, int offset, int size);
 
+    List<PostResponse> searchByKeyword(String keyword, Long currentUserId, int offset, int size);
+
+    int countByKeyword(String keyword);
+
     // status 为 1 表示帖子被删除，0 正常，2 隐藏
     @Select("""
             SELECT id, user_id, board_id, title, content, like_count, created_at, updated_at, status

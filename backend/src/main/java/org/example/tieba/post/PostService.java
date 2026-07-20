@@ -84,6 +84,14 @@ public class PostService {
         postMapper.update(post);
     }
 
+    public PageResult<PostResponse> searchPosts(String keyword, PageParam pageParam) {
+        int current = pageParam.getCurrent();
+        int size = pageParam.getSize();
+        int offset = (current - 1) * size;
+        List<PostResponse> list = postMapper.searchByKeyword(keyword, securityUtil.getCurrentUserId(), offset, size);
+        return new PageResult<>(postMapper.countByKeyword(keyword), current, size, list);
+    }
+
     public void deletePost(Long postId) {
         Long userId = postMapper.selectUserByPostId(postId);
         if (userId == null) {

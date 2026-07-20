@@ -10,6 +10,7 @@ public class PostResponse {
     private Long id;
     private UserBrief author;
     private Long boardId;
+    private String boardName;
     private String title;
     private String content;
     private Long likeCount;

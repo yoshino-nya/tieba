@@ -33,6 +33,11 @@ public class PostController {
         return Result.success(postService.listPostsByUser(userId, pageParam));
     }
 
+    @GetMapping("/api/posts/search")
+    public Result<PageResult<PostResponse>> search(@RequestParam String keyword, @Valid PageParam pageParam) {
+        return Result.success(postService.searchPosts(keyword, pageParam));
+    }
+
     @GetMapping("/api/posts/{postId}")
     public Result<PostDetailResponse> getDetail(@PathVariable Long postId) {
         return Result.success(postService.getDetail(postId));
