@@ -17,7 +17,21 @@
       "Bash(npm *)",
       "Read(//home/yoshino/.m2/repository/org/springframework/boot/spring-boot-starter-aop/**)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-aop/4.0.6/spring-boot-starter-aop-4.0.6.pom)",
-      "Bash(redis-cli ping *)"
+      "Bash(redis-cli ping *)",
+      "Bash(docker compose *)",
+      "Bash(sudo docker *)",
+      "Bash(mkdir -p common/dto common/validation)",
+      "Bash(mkdir -p infra/config infra/security infra/aop)",
+      "Bash(mkdir -p auth user board post comment like ai upload)",
+      "Bash(mv common/Result.java common/)",
+      "Bash(mv common/PageResult.java common/)",
+      "Bash(mv constants/ErrorCode.java common/)",
+      "Bash(mv exception/BusinessException.java common/)",
+      "Bash(mv exception/GlobalExceptionHandler.java common/)",
+      "Bash(mvn clean *)",
+      "Bash(mvn test *)",
+      "Read(//home/yoshino/Projects/**)",
+      "Read(//home/yoshino/Projects/tiebaFrontEnd/**)"
     ]
   }
 }

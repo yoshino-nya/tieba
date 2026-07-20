@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.example.tieba.mapper.BoardMapper">
-    <resultMap id="boardDetailResponse" type="org.example.tieba.dto.BoardDetailResponse" autoMapping="true">
+<mapper namespace="org.example.tieba.board.BoardMapper">
+    <resultMap id="boardDetailResponse" type="org.example.tieba.board.BoardDetailResponse" autoMapping="true">
         <id property="id" column="id"/>
-        <association property="manager" javaType="org.example.tieba.dto.UserBrief">
+        <association property="manager" javaType="org.example.tieba.common.dto.UserBrief">
             <id property="id" column="manager_id"/>
             <result property="username" column="manager_username"/>
             <result property="nickname" column="manager_nickname"/>

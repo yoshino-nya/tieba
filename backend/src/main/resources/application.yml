@@ -2,7 +2,7 @@ spring:
   application:
     name: tieba
   datasource:
-    url: jdbc:mysql://localhost:3306/tieba?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/tieba?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -10,6 +10,8 @@ spring:
     redis:
       host: localhost
       port: 6379
+  jackson:
+    time-zone: Asia/Shanghai
 app:
   jwt:
     secret: TieBaSecretKey2026VeryLongSecretKeyForJWTSigningPurposes!
@@ -21,6 +23,9 @@ langchain4j:
     model-name: deepseek-v4-flash
     max-tokens: 1024
     temperature: 1.2
+
+upload:
+  dir: ${UPLOAD_DIR:/home/yoshino/Projects/java/tieba/backend/uploads}
 
 server:
   port: 4000

@@ -2,7 +2,7 @@ package org.example.tieba.ai;
 
 import dev.langchain4j.agent.tool.Tool;
 import lombok.RequiredArgsConstructor;
-import org.example.tieba.mapper.BoardMapper;
+import org.example.tieba.board.BoardMapper;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

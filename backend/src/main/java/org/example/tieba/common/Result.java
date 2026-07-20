@@ -2,7 +2,6 @@ package org.example.tieba.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import org.example.tieba.constants.ErrorCode;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)

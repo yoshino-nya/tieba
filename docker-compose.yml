@@ -1,0 +1,29 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "4000:4000"
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
+  #   environment:
+  #     SPRING_DATASOURCE_USERNAME: root
+  #     SPRING_DATASOURCE_PASSWORD: 1234
+  #     SPRING_DATA_REDIS_HOST: redis
+  #     TZ: Asia/Shanghai
+  #     UPLOAD_DIR: /app/uploads
+  #   volumes:
+  #     - uploads_data:/app/uploads
+
+volumes:
+  uploads_data:

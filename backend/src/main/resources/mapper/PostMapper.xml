@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.example.tieba.mapper.PostMapper">
+<mapper namespace="org.example.tieba.post.PostMapper">
 <!--    <cache/>-->
 
-    <update id="update" parameterType="org.example.tieba.model.Post">
+    <update id="update" parameterType="org.example.tieba.post.Post">
         UPDATE post
         <set>
             <if test="title != null">title = #{title},</if>
@@ -16,9 +16,9 @@
         WHERE id = #{id}
     </update>
 
-    <resultMap id="postResponse" type="org.example.tieba.dto.PostResponse" autoMapping="true">
+    <resultMap id="postResponse" type="org.example.tieba.post.PostResponse" autoMapping="true">
         <id property="id" column="id"/>
-        <association property="author" javaType="org.example.tieba.dto.UserBrief">
+        <association property="author" javaType="org.example.tieba.common.dto.UserBrief">
             <id property="id" column="author_id"/>
             <result property="username" column="author_username"/>
             <result property="nickname" column="author_nickname"/>
@@ -58,9 +58,9 @@
         LIMIT #{offset}, #{size}
     </select>
 
-    <resultMap id="postDetailResponse" type="org.example.tieba.dto.PostDetailResponse" autoMapping="true">
+    <resultMap id="postDetailResponse" type="org.example.tieba.post.PostDetailResponse" autoMapping="true">
         <id property="id" column="id"/>
-        <association property="author" javaType="org.example.tieba.dto.UserBrief">
+        <association property="author" javaType="org.example.tieba.common.dto.UserBrief">
             <id property="id" column="author_id"/>
             <result property="username" column="author_username"/>
             <result property="nickname" column="author_nickname"/>
