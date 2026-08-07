@@ -31,7 +31,8 @@
       "Bash(mvn clean *)",
       "Bash(mvn test *)",
       "Read(//home/yoshino/Projects/**)",
-      "Read(//home/yoshino/Projects/tiebaFrontEnd/**)"
+      "Read(//home/yoshino/Projects/tiebaFrontEnd/**)",
+      "Bash(npx vite *)"
     ]
   }
 }
